@@ -1,4 +1,5 @@
 package cg.hospital.entity;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -22,7 +23,7 @@ public class Patient {
     private Integer insuranceId;
 
     // PCP is FK to Physician — ManyToOne because many patients can have same PCP
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PCP", nullable = false)
     private Physician pcp;
 
