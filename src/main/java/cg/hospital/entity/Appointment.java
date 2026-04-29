@@ -1,8 +1,17 @@
 package cg.hospital.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "APPOINTMENT")
@@ -33,7 +42,7 @@ public class Appointment {
     private String examinationRoom;
 
     // The HATEOAS relationship builder
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Prescribes> prescriptions;
 
     public Integer getAppointmentID() {
