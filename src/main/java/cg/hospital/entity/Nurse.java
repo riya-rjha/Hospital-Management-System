@@ -32,7 +32,7 @@ public class Nurse {
         this.registered = registered;
         this.ssn = ssn;
     }
-
+ 
     // Getters & Setters
     public Integer getEmployeeId() { return employeeId; }
     public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }

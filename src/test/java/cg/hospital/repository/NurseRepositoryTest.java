@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-//@AutoConfigureTestDatabase(replace = Replace.NONE)  // uses your MySQL, not H2
+@AutoConfigureTestDatabase(replace = Replace.NONE)  
 public class NurseRepositoryTest {
 
     @Autowired
@@ -74,3 +74,5 @@ public class NurseRepositoryTest {
         assertEquals(999999, updated.getSsn());
     }
 }
+
+
