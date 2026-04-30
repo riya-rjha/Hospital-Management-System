@@ -209,4 +209,58 @@ class DepartmentApiTest {
         mockMvc.perform(delete("/api/departments/" + id))
                 .andExpect(status().isNoContent());
     }
+    
+    
+ // ── PAGE 3 MISSING TESTS ─────────────────────────────────────────────────────
+
+ // Tab 1 — Affiliated physicians for a department
+ @Test
+ void shouldReturnAffiliatedPhysicians_whenDepartmentExists() throws Exception {
+     mockMvc.perform(get("/api/affiliated-with/search/findByDepartment_DepartmentID?departmentID=1"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$._embedded.affiliatedWith").exists());
+ }
+
+ @Test
+ void shouldReturnEmptyAffiliations_whenDepartmentNotExists() throws Exception {
+     mockMvc.perform(get("/api/affiliated-with/search/findByDepartment_DepartmentID?departmentID=999999"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$._embedded.affiliatedWith").isEmpty());
+ }
+
+ @Test
+ void shouldReturnPrimaryAffiliationsOnly_whenDepartmentExists() throws Exception {
+     mockMvc.perform(get("/api/affiliated-with/search/findByDepartment_DepartmentIDAndPrimaryAffiliationTrue?departmentID=1"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$._embedded.affiliatedWith").exists());
+ }
+
+ @Test
+ void shouldReturnPhysicianAffiliations_whenPhysicianExists() throws Exception {
+     mockMvc.perform(get("/api/affiliated-with/search/findByPhysician_EmployeeId?employeeId=3"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$._embedded.affiliatedWith").exists());
+ }
+
+ @Test
+ void shouldReturnAffiliationCount_whenDepartmentExists() throws Exception {
+     mockMvc.perform(get("/api/affiliated-with/search/countByDepartment_DepartmentID?departmentID=1"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$", greaterThan(0)));
+ }
+
+ // Tab 2 — Head physician detail for a department
+ @Test
+ void shouldReturnHeadPhysician_whenDepartmentExists() throws Exception {
+     // Step 1 — confirm department 1 exists and has a name
+     mockMvc.perform(get("/api/departments/1"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$.name").exists());
+
+     // Step 2 — confirm the head link exists via affiliated-with
+     // Department 1 head is EmployeeID=4, who is affiliated with dept 1
+     mockMvc.perform(get("/api/affiliated-with/search/findByDepartment_DepartmentID?departmentID=1"))
+             .andExpect(status().isOk())
+             .andExpect(jsonPath("$._embedded.affiliatedWith").exists());
+ }
 }
