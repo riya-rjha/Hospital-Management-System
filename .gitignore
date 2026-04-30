@@ -8,10 +8,8 @@ src/test/resources/application.properties
 
 ### Test output
 test-output/
-
 src/main/resources/application.properties
 src/test/resources/application.properties
-
 
 ### STS ###
 .apt_generated
@@ -21,6 +19,7 @@ src/test/resources/application.properties
 .settings
 .springBeans
 .sts4-cache
+.metadata/
 
 ### IntelliJ IDEA ###
 .idea
@@ -45,7 +44,6 @@ build/
 /src/main/resources/application.properties
 /src/main/resources/application.yml
 
-
 # --- BUILD OUTPUT ---
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -61,12 +59,8 @@ build/
 .springBeans
 .sts4-cache
 
-
 # Misc
-
 src\main\resources\application.properties
 src\main\resources\application.yml
 src/test/resources/application.properties
-
-pom.xml.metadata/ 
-.metadata/
+pom.xml
