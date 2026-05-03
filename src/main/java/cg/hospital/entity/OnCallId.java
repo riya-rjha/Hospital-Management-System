@@ -56,4 +56,26 @@ public class OnCallId implements Serializable {
     public int hashCode() {
         return Objects.hash(nurse, blockFloor, blockCode, onCallStart, onCallEnd);
     }
+
+	public void setNurse(Integer nurse) {
+		this.nurse = nurse;
+	}
+
+	public void setBlockFloor(Integer blockFloor) {
+		this.blockFloor = blockFloor;
+	}
+
+	public void setBlockCode(Integer blockCode) {
+		this.blockCode = blockCode;
+	}
+
+	public void setOnCallStart(LocalDateTime onCallStart) {
+		this.onCallStart = onCallStart;
+	}
+
+	public void setOnCallEnd(LocalDateTime onCallEnd) {
+		this.onCallEnd = onCallEnd;
+	}
+    
+    
 }
