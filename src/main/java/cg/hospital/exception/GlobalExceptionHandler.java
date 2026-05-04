@@ -90,6 +90,12 @@ public class GlobalExceptionHandler {
 		return build(HttpStatus.BAD_REQUEST, "Bad Request", msg, request);
 	}
 
+	// ── 400: illegal argument (e.g. composite id wrong format) ───────────────
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
+		return build(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage(), request);
+	}
+
 	@ExceptionHandler(org.springframework.beans.TypeMismatchException.class)
 	public ResponseEntity<Map<String, Object>> handleTypeMismatchGeneral(
 			org.springframework.beans.TypeMismatchException ex, WebRequest request) {
@@ -116,6 +122,5 @@ public class GlobalExceptionHandler {
 
 		return build(HttpStatus.BAD_REQUEST, "Bad Request. " + msg, ex.getMessage(), request);
 	}
-
 
 }
